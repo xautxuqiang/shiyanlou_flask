@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h3>----The File's Content---</h3>
+{% endblock %}
+
+{% block content %}
+<h4>{{ the_file.category.name }}</h4>
+<h4>{{ the_file.created_time }}</h4>
+<h4>{{ the_file.content }}</h4>
+{% endblock %}
