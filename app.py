@@ -22,7 +22,7 @@ class File(db.Model):
     category = db.relationship('Category', backref=db.backref('posts',lazy=True))
 
     def add_tag(self, tag_name):
-        tag = {"id":self.id, "tname":tag_name}
+        tag = {"file_id":self.id, "tname":tag_name}
         tag_in_tags = mongo_db.tags.find_one(tag) 
         if tag_in_tags:
             print("tag_name already in tags!")
@@ -30,13 +30,13 @@ class File(db.Model):
             mongo_db.tags.insert_one(tag)
 
     def remove_tag(self, tag_name):
-        tag = {"id":self.id, "tname":tag_name}
+        tag = {"file_id":self.id, "tname":tag_name}
         mongo_db.delete_one(tag)
 
     @property
     def tags(self):
         result = []
-        for tag in mongo_db.tags.find({'id':self.id}):
+        for tag in mongo_db.tags.find({'file_id':self.id}):
             result.append(tag['tname'])
         return result
 
